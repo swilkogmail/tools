@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+'''
+unary operator only has 1 operator, '+' for example has two, i.e. 1 + 1 (the 1 and 1 are the operators)
+~ only has one
+e.g. ~1 
+'''
+# Bitwise complement operator
+a = 0b010 # binary integer which in decimal is 2
+print(bin(a))
+b = ~a
+print(b)
+# ~ gives a way of showing a negative number the formla is -ve a - 1, i.e. -2 - 1 = -3
+print(bin(~a))
+
+#  AND OR XOR AND NOT
+
+a = 0b1001
+b = 0b1100
+# | means OR either OR so if either of them is true then the resulting column is true (1 is true and 0 is false)
+print(bin(a | b))
+# AND & requires that both are true to return true
+print(bin(a & b))
+# XOR exclusive OR means on 1 true value should be there otherwise it's false
+print(bin(a ^ b)) # NB it removed the trailing 0 so instead of 0b0101 it will be 0b101
+
+# shift operators
+a = 0b110
+print(bin(a >> 2))  # shift the point two to the left
+print(bin(a << 2))  # shift the point two to the left
