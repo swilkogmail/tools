@@ -27,3 +27,36 @@ print(bin(a ^ b)) # NB it removed the trailing 0 so instead of 0b0101 it will be
 a = 0b110
 print(bin(a >> 2))  # shift the point two to the left
 print(bin(a << 2))  # shift the point two to the left
+
+'''
+binary operations, more useful
+not True
+not False
+or
+and
+'''
+'''
+Comparison
+< less > greater <= >= # can be used to compare strings (place in alphabet)
+== for equality, supports all types
+!= for not equal
+1 is 1 (is the identity operator)
+1 is 1.0 (false)
+'a' is 'a' (true)
+
+is with list return fale if not initialised
+i.e.
+[] is []
+false
+that as empty list can be changed
+
+id function can be used to return the immutable numer associated with a charater
+ord function can be used to get the numeric value of a charcter
+
+order of operators priority
+https://docs.python.org/3/reference/expressions.html#operator-precedence
+
+'''
+print(ord('a'))
+print(ord('A'))
+print(id('A'))
