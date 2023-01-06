@@ -17,4 +17,4 @@ print(bool(''))
 when used with and it will return the first falsey value, i.e. this and that will return that this and 0 and that will return 0
 '''
 print('this' and 'that')
-print('this' and 0 and 'that')
+print('this' and 'that' and 1)
