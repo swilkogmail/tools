@@ -31,3 +31,12 @@ print(var.upper()) # upper is the method
 print("Tab\tDelimited")
 print("New\nLine")
 print("New\\nLine") # unescaped sequence
+
+my_arn = 'arn:aws:sqs:us-east-1:368476372619:a205384-sqs-preprod-primary-datalake-failure-eaw-mng-us-east-1-uat'
+arn, aws, service, region, account, name = (my_arn).split(':')
+print(arn)
+print(aws)
+print(service)
+print(region)
+print(account)
+print(name)
