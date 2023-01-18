@@ -1,0 +1,10 @@
+#!/usr/bin/python3
+my_string = input("Enter a string: ")
+print(my_string)
+print(my_string.upper())
+print(my_string.title())
+print(my_string.capitalize())
+my_string_list = my_string.split()
+print(my_string_list)
+my_string_list_sorted = my_string_list.sort()
+print(my_string_list_sorted)
