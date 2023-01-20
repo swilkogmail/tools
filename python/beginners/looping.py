@@ -77,7 +77,7 @@ else:
 # if you're just seraching for one instance in the list use break and an else can
 # be used to inform that the colour is not in there
 # most of the times you'd not bother with the else
-colours = ['red', 'green', 'pink', 'blue', 'orange']:
+colours = ['red', 'green', 'pink', 'blue', 'orange']
 for colour in colours:
     print(colour)
     if colour == 'blue':
@@ -85,3 +85,19 @@ for colour in colours:
         break
 else:
     print("blue is not in the list")
+
+# for loop to iterate
+my_range = range(10) # up to the stop value but not including it
+print(list(my_range))
+# ranges use the least amount of space as it's only calulated as it's needed
+my_range = range(1,14,2) # start value, stop values and step
+print(list(my_range))
+
+count = 1
+while count <= 4:
+        print("looping")
+        count += 1
+
+# the _ is concention to say the variable is not needed 
+for _ in range(4):
+    print("looping")
