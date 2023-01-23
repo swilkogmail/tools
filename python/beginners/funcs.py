@@ -47,4 +47,21 @@ print(details)
 
 # print(details)
 
-def can_drive(age, driving_age)
+# setting a default
+def can_drive(age, driving_age=18):
+    return age >= driving_age
+
+# returns true
+can_drive(29)
+
+# override a default
+def can_drive(age, driving_age=18):
+    return age >= driving_age
+
+# returns false
+can_drive(29,30)
+
+# once you start to define default values then teh remaining parameters also have to be
+# defined with default values
+
+# recursion - calling function from inside itself
