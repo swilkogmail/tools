@@ -3,6 +3,7 @@
 # from their parent scopes that are suually cleaned up
 # usually other_name would be cleaned up although because of
 # closure it is held on to
+#
 
 def greeter(prefix):
     other_name = prefix + "xxx"
