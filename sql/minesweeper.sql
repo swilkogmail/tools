@@ -36,7 +36,10 @@ insert into mine values (5,5,'N');
 
 SELECT * FROM minesweep;
 
-
+/*
+count the number of mines that
+surround the co-ordinates
+*/
 SELECT sum(mine) mines
   FROM
 (
