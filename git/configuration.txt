@@ -1,0 +1,6 @@
+3 levels of precedence in git file reading
+1. .git/config # repos specific manipulated by the --file option
+2. ~/.gitconfig # user-specific manipulated by the --global option
+3. /etc/gitconfig # system wide manipulated by --system parameter
+
+
