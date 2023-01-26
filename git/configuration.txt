@@ -2,5 +2,10 @@
 1. .git/config # repos specific manipulated by the --file option
 2. ~/.gitconfig # user-specific manipulated by the --global option
 3. /etc/gitconfig # system wide manipulated by --system parameter
+--unset to remove a setting
+aliases can be created:
+
+git config --global alias.show-graph 'log --graph --abbrev-commit --pretty=oneline'
+this shows the 
 
 
