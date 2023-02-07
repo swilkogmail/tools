@@ -2,7 +2,7 @@
 Question 19: Incorrect
 # What is the expected output of the following code snippet ?
 
-def sum_list(args, fun):
+def sum_list(args, fun): # The function sum_list() takes two parameters: an iterable (ex : a list) and a function.
     z = 0
     for x in args:
         z = z + fun(x)
@@ -10,9 +10,13 @@ def sum_list(args, fun):
  
 print(sum_list([ex//2 for ex in range(5)], lambda x: 1 if x>1 else 0))
 
-# Explanation:
+# ex//2 for ex in range(5) returns a list of 0,0,1,1,2 (the floor of 0/2,1/2,2/2,3/2,4/2)
+# this list is fed into sum_list
+# the function lambda x: 1 if x>1 else 0 is called with each of the lists items
+# and return 1 if x> 1 and 0 if not
 
-# The function sum_list() takes two parameters: an iterable (ex : a list) and a function.
+for ex in range(5)
+    print(ex)
 
 # sum_list([ex//2 for ex in range(5)], lambda x: 1 if x>1 else 0) is an invocation of the function sum_list()  with :
 
