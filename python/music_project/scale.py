@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 class Scale:
     """
     Scale is a name for a series of musical notes
@@ -11,4 +10,4 @@ class Scale:
 
 
     def description(self):
-        print(f"{self.key} {self.name} is a {self.type} {self.__class__.__name__}")
+        return f"{self.key} {self.name} is a {self.type} {self.__class__.__name__}"
