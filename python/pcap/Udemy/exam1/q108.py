@@ -3,14 +3,34 @@
 
 w = 'Luke'
 x = 'luke'
-y = 10
-z = 5
-# print(w < x)
-# print(x > y)
+y = str('10')
+z = str('5')
+print(w < x)
+print(x > y)
 print(y < z)
-# print(w > z)
-# print(w < x and y < z)
-# print(x > y and w > z)
+print(w > z)
+print(w < x and y < z)
+print(x > y and w > z)
+
+string = ['Luke', 'luke', '10', '5']
+print("sorting by default: lowest ORD number first (this is used by '<' and '>')")
+print(sorted(string))
+
+print("Sorting with a lower method")
+string.sort(key=str.lower)
+print(string)
+
+print("Sorting with a Upper method")
+string.sort(key=str.upper)
+print(string)
+
+print("Sorting with a lower method reverse")
+string.sort(key=str.lower, reverse=True)
+print(string)
+
+print("Sorting with a Upper method reverse")
+string.sort(key=str.upper, reverse=True)
+print(string)
 
 # w < x True # code points of upper-case characters (A..Z) are less than code points of lower-case characters (a..z)
 #             # 'Luke' < 'luke'   is True  ( upper-case 'L'  has a smaller code point than lower-case 'l' )

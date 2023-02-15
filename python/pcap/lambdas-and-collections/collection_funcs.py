@@ -7,17 +7,21 @@ domain = [1,2,3,4,5]
 # f(x) = x * 2
 
 # map takes two arg, function name (which can be a lambda, and a domain)
-# takes a collection as input and doubles its vales and returns a lsit the same size
+# takes a collection as input and doubles its vales and returns a list the same size
 our_range = map(lambda num: num * 2, domain)
+# needs tobe coverted to a list otherwise returns a map object
+# range and domain always the same size
 print(list(our_range))
 
 # result you get is alwas the same length as the domain that is supplied
 
-evens = filter(lambda num: num % 2 ==0, domain)
+evens = filter(lambda num: num % 2 == 0, domain)
+# everything in python returns a true or false,
 print(list(evens))
 
 # pulled in from functools
 the_sum = reduce(lambda acc, num: acc + num, domain, 0)
+# acc = accumlator.  It takes 0 to initiate the number, loops through the domain list and sums each of the output
 print(the_sum)
 
 
@@ -35,3 +39,8 @@ print(sorted(words, key=lambda s: s.lower()))
 print("Sorting with a method")
 words.sort(key=str.lower, reverse=True)
 print(words)
+
+
+words = ['Boss', 'a', 'Alfred', 'Fig', 'Daemon', 'dig', '10', '5']
+print("sorting by default")
+print(sorted(words))
