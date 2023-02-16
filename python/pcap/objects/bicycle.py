@@ -26,6 +26,9 @@ class Bicycle(Vehicle):
     def description(self):
         initial = super().description()
         return f"{initial}  on {len(self.tyres)} tyres."
+    
+    def __str__(self):
+        return f"<{self.__class__.__name__} {self.__dict__}>"
 
 bike = Bicycle()
 print(bike.tyres)

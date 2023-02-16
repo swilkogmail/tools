@@ -8,3 +8,6 @@ class Mode(Scale):
     def description(self):
         initial = super().description()
         return f"{initial} containing notes {self.notes}"
+    
+    def __str__(self):
+        return f"<{self.__class__.__name__} {self.__dict__}>"

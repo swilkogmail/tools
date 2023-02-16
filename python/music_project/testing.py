@@ -18,3 +18,6 @@ print(AAeolian.type)
 print(AAeolian.notes)
 print(AAeolian.description())
 print(dir(Mode))
+# inspecting our __str__ representations
+print(str(AAeolian))
+print(str(CMajor))
