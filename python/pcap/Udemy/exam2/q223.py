@@ -1,32 +1,31 @@
 #!/usr/bin/python3
 # What is the expected output of the following snippet ?
-
-my_list1=list('Skywalker') # ['S', 'k', 'y', 'w', 'a', 'l', 'k', 'e', 'r']
-my_list2=list('Vader') # ['V', 'a', 'd', 'e', 'r']
-my_list3=list(filter(lambda x: x not in my_list2, my_list1))
-print(my_list3)
-
-
-# Knowledge Area : Miscellaneous
-
-# Topic : lambda functions, filter(), converting generator objects into lists using the list() function
+class Jedi:
+    def __init__(self,name):
+        self.name = name
+    def __str__(self):
+        return "I am Jedi " + self.name
+ 
+class Sith:
+    def __init__(self,name):
+        self.name = name
+    def __str__(self):
+        return "I am Sith " + self.name
+ 
+class Padawan(Jedi,Sith):
+    def __init__(self,name):
+        self.name = name
+ 
+Baby_Yoda = Padawan('Baby Yoda')
+print(Baby_Yoda)
 
 # Explanation:
-
-# The list() constructor returns a list. When used with a string, list() will return a list of all characters of this string.
-
-# So, list('Skywalker')  returns :
-
-# ['S', 'k', 'y', 'w', 'a', 'l', 'k', 'e', 'r']
-# and list('Vader')  returns:
-
-# ['V', 'a', 'd', 'e', 'r']
-# The third list (my_list3) is created using a list comprehension. This list comprehension uses the filter() function to generate the list. 
-# This function filters its second argument while being guided by directions flowing 
-# from the function specified as the first argument. The elements which return True from the function pass the filter - the others are rejected.
-
-# In this case, the function used for the filter is a lambda function.
-
-# In the above code, the filter() function will simply filter my_list1 with those characters that are NOT in my_list2, i.e. : 'S', 'k', 'y', 'w', 'l', 'k' .
-
-# And the resulting list is : ['S', 'k', 'y', 'w', 'l', 'k']
+# Class Padawan is a subclass of both the Jedi and Sith classes. As such, all 
+# methods defined in the superclasses  Jedi and Sithare automatically inherited by subclass Padawan.
+# In particular, method __str__() is inherited by  subclass Padawan. This method 
+# allows to customize the returned string when printing an object. But the __str__() 
+# method is defined in both the  Jedi and Sith classes : so which one would be used when calling print(Baby_Yoda)  ?
+# Python scans the inheritance path from left to right and will use the first __str__()  method 
+# ound in one of the superclass : in the above case,  class Jedi is the first class with the __str__()  
+# method in the Padawan inheritance path : so this is this method that will be used. If the  class P
+# adawan had been defined as class Padawan(Sith,Jedi):  then the __str__() method from the Sith class would have been used.
