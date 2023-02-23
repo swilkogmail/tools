@@ -4,14 +4,16 @@
 x='luke'
 y='Luke'
  
-if x > y:
+if x > y: # l > l true
     print('Han')
-elif x < y:
+elif x < y: # l < L false
     print('Leia')
-elif x==y:
+elif x==y: # l = L false
     print('Ben')
 else:
     print('Chewie')
+
+# upper case is less that lower case
 
 # Explanation:
 # Comparing strings is determined by comparing the first different character in both strings (using ASCII/UNICODE code).

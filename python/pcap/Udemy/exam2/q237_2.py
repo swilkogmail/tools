@@ -4,13 +4,13 @@ x=0
 y=3
  
 try:
-    print(x%y)
-    assert bool(y) == False
+    print(x%y) # 0/3 = 0
+    assert bool(y) == False # this will be raised
     print(y/x)
 except ZeroDivisionError:
     print('Error 1')
-except AssertionError:
-    print('Error 2')
+except AssertionError: # this will be caught
+    print('Error 2') # this will be printed
 except BaseException:
     print('Error 3')
 finally:
