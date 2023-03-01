@@ -5,7 +5,7 @@ f = open("myfile.txt", "at")
 for i in range(1,11):
     f.write('Line #' + str(i) + '\n')
 f.seek(0)
-print(f.readline(10))
+print(f.readline(10)) # So, line of code print(f.readline(10)) will raise an unhandled exception because the file cannot be read in the 'a' (append) mode.
 f.close()
 
 
@@ -14,8 +14,6 @@ f.close()
 # In the append mode, the file associated with the stream doesn't need to exist; if it doesn't exist, 
 # it will be created; if it exists the previous content of the file remains untouched and any data 
 # written to the file will be inserted at the end, after the existing data. Also, in this mode, the file cannot be read - it is only open for writing.
-
-# So, line of code print(f.readline(10)) will raise an unhandled exception because the file cannot be read in the 'a' (append) mode.
 
 # So, the correct answer is : The code will raise an unhandled exception.
 

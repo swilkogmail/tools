@@ -5,7 +5,7 @@ x = 'France'
  
 def func(x):
     return x[:-3]
-# The function func() takes a string a returns it minus the last three characters.
+# The function func() takes a string a returns it MINUS the last three characters.
 # When executing this function twice on string 'France', the resulting string will be an empty string.
 
 try:

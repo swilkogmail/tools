@@ -11,7 +11,7 @@ except ValueError:
     print("ValueError")
 except IndexError:
     print("IndexError")
-except KeyError:
+except KeyError:  # KeyError exception will be raised, and KeyError will be printed.
     print("KeyError")
 
 # Explanation
