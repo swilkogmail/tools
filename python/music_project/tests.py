@@ -16,17 +16,7 @@ from collections import deque
 
 # key = input("enter a key to get the notes for major scale: ")
 
-def major_scale(key):
-    all_notes = ["A", "A#", "B", "C", "C#", "D", "D#","E", "F", "F#","G", "G#"]
-    intervals = ["1", "m2", "M2","m3","M3", "P4","b5","P5","m6","M6","b7","M7"]
-    i  = all_notes.index(key)
-    nt_q = deque(all_notes)
-    nt_q.rotate(-i)
-    chromatic_scale = [*nt_q]
-    major_scale_d = dict(zip(intervals, chromatic_scale))
-    return f"{key} Major Scale is {major_scale_d.get('1')},{major_scale_d.get('M2')},{major_scale_d.get('M3')},{major_scale_d.get('P4')},{major_scale_d.get('P5')},{major_scale_d.get('M6')},{major_scale_d.get('M7')}"
-
-def major_scale2(key):
+def sharp_keys(key):
     all_notes = [
                 "A", "A#", "B",
                 ["B#", "C"], "C#", "D",
@@ -42,52 +32,38 @@ def major_scale2(key):
         i = 3
     elif key == "C#":
         i = 4
-        print(all_notes[3])
-        all_notes[3].pop(1)
-        all_notes[8].pop(1)
     else:
         i  = all_notes.index(key)
-    # print(f"location of {key} in list is {i}")
     nt_q = deque(all_notes)
     nt_q.rotate(-i)
     chromatic_scale = [*nt_q]
     d = dict(zip(intervals, chromatic_scale))
-    print(f"this is the scale that needs some work {d}")
-    major_scale_list = d.get('1'),d.get('M2'),d.get('M3'),d.get('P4'),d.get('P5'),d.get('M6'),d.get('M7')
-    for note in major_scale_list:
-        print (f"note is {note}")
-    print(major_scale_list)
-    print(f"{key} Major Scale is {d.get('1')},{d.get('M2')},{d.get('M3')},{d.get('P4')},{d.get('P5')},{d.get('M6')},{d.get('M7')}")
 
+    major_note_opts = d.get('1'),d.get('M2'),d.get('M3'),d.get('P4'),d.get('P5'),d.get('M6'),d.get('M7')
+    
+    major_scale_notes = []
+    # work out which of the enharmonic note options to take
+    for note in major_note_opts:
+        if isinstance(note,str):
+            major_scale_notes.append(note)
+    for note in major_note_opts:
+        if isinstance(note,list):
+            opt1 = note[0][0]
+            # print(f"option1: {opt1}")
+            if opt1 not in major_scale_notes:
+                major_scale_notes.append(note[0])
+            else:
+                major_scale_notes.append(note[1])
+    # sort (as append changes order) and resort in key order
+    major_scale_notes = sorted(major_scale_notes)
+    i  = major_scale_notes.index(key)
+    nt_q = deque(major_scale_notes)
+    nt_q.rotate(-i)
+    major_scale_list = [*nt_q]
+    return major_scale_list
 
-# my_scale = major_scale2("C")
-my_scale = major_scale2("G")
-# my_scale = major_scale2("D")
-# my_scale = major_scale2("A")
-# my_scale = major_scale2("E")
-# my_scale = major_scale2("B")
-# my_scale = major_scale2("F#")
+sharp_keys_list = ['C','G','D', 'A','E','B','F#','C#']
 
-# all_notes = [
-#             "A", "A#", "B",
-#             ["B#", "C"], "C#", "D",
-#             "D#", "E", ["E#", "F"],
-#             "F#", "G", "G#"
-#             ]
-# intervals = ["1", "m2", "M2", 
-#              "m3", "M3", "P4", 
-#              "b5", "P5", "m6",
-#              "M6", "b7", "M7"
-#             ]
-
-# print(all_notes)
-# print(all_notes[3][1])
-# print(intervals)
-# d = dict(zip(intervals, all_notes))
-# print(d.get("m3"))
-# m3_v1 = (d.get("m3"))[0]
-# m3_v2 = (d.get("m3"))[1]
-# m6_v1 = (d.get("m6"))[0]
-# m6_v2 = (d.get("m6"))[1]
-# print(f"minor 3 has two enhamonically equiv notes: {m3_v1} & {m3_v2}")
-# print(f"minor 6 has two enhamonically equiv notes: {m6_v1} & {m6_v2}")
+for key in sharp_keys_list:
+    notes = sharp_keys(key)
+    print(notes)
