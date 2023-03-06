@@ -40,9 +40,6 @@ def major_scale2(key):
                 ]
     if key == "C":
         i = 3
-        # print(all_notes[3])
-        # all_notes[3].pop(0)
-        # all_notes[8].pop(0)
     elif key == "C#":
         i = 4
         print(all_notes[3])
@@ -56,13 +53,14 @@ def major_scale2(key):
     chromatic_scale = [*nt_q]
     d = dict(zip(intervals, chromatic_scale))
     print(f"this is the scale that needs some work {d}")
-    major_scale_list = []
     major_scale_list = d.get('1'),d.get('M2'),d.get('M3'),d.get('P4'),d.get('P5'),d.get('M6'),d.get('M7')
+    for note in major_scale_list:
+        print (f"note is {note}")
     print(major_scale_list)
     print(f"{key} Major Scale is {d.get('1')},{d.get('M2')},{d.get('M3')},{d.get('P4')},{d.get('P5')},{d.get('M6')},{d.get('M7')}")
 
 
-my_scale = major_scale2("C")
+# my_scale = major_scale2("C")
 my_scale = major_scale2("G")
 # my_scale = major_scale2("D")
 # my_scale = major_scale2("A")
