@@ -1,0 +1,45 @@
+mkdir eaw_tools
+cd eaw_tools
+create a new virtual env:
+pipenv --python 3.9
+create a shell within the enviroment
+pipenv shell
+
+pipenv install pyfiglet
+pipenv install psycopg
+
+create a defined structure for the package:
+PY_DIR='build/python/lib/python3.9/site-packages'
+mkdir -p ${PY_DIR}
+
+generate a requirements.txt file
+pipenv lock
+
+now we can install the requirments package in the temp directory
+pip install requirements.txt --no-deps -t 
+
+zip -r ../eaw_tools.zip .
+
+rm -r build/
+
+# attempt TOO_MANY_ROWS
+
+mkdir eaw_tools
+mkdir -p python/lib/python3.9/site-packages/
+pip install --target python/lib/python3.8/site-packages/ pyfiglet
+pip install --target python/lib/python3.8/site-packages/ psycopg
+
+zip -r eaw-tools.zip ./python
+application/x-zip-compressed
+
+root@TR-BSNQ0Z2:/mnt/c/linuxshare/layers/eaw-tools# tree
+.
+├── eaw-tools.zip
+└── python
+    ├── eaw-tools.py
+    └── lib
+        └── python3.9
+            └── site-packages
+
+4 directories, 2 files
+
