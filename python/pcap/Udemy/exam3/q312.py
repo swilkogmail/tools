@@ -7,7 +7,8 @@
 
 # Explanation:
 
-# When importing a module, Python will search for those modules in all folders defined in the path variable. That variable can be read or modified using the sys module.
+# When importing a module, Python will search for those modules in all folders defined in the path variable. 
+# That variable can be read or modified using the sys module.
 
 # In addition, because \ is a special character, an escape character (\) must be use to represent it in a string - in other words : \\
 
