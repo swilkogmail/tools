@@ -1,0 +1,7 @@
+mode      meaning                   file doesn't exist      existing data
+r         open for read             error                   n/a
+w         open for write            create one              removed
+a         open for append           create one              not removed
+r+        open for read and write   error                   not removed
+w+        open for write and read   create one              not removed
+a+        open for append and read  create one              not removed
