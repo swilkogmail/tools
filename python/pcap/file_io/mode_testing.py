@@ -2,6 +2,7 @@
 import os
 import errno
 import io
+# checkin
 # mode      meaning                   file doesn't exist      existing data
 # r         open for read             error                   n/a
 # w         open for write            create one              truncate and start writing from 0th position
