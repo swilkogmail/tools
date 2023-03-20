@@ -1,27 +1,12 @@
 #!/usr/bin/env python3
-import os
-import errno
-import io
-# checkin
-# mode      meaning                   file doesn't exist      existing data
-# r         open for read             error                   n/a
-# w         open for write            create one              truncate and start writing from 0th position
-# a         open for append           create one              not removed
-# r+        open for read and write   error                   not removed
-# w+        open for write and read   create one              truncate and start writing from 0th position
-# a+        open for append and read  create one              not removed
-# x         open for creation
-#
-# t you will be a t back, b you will get bytes back
-
-# if we open for read and it doesn't exist it will raise errno
-# if we try to use read(file_handle) it will raise invalid as it knows
-# that the file handle was obtained for write only
-
-
-# todo
-# add error checking with errno on file open
-# change input to take filename in
+import os, errno, sys
+# x - write only. EEXIST if file is already there
+# r - read only. ENONENT is file does not exist.
+# r+ - read and write. ENONENT is file does not exist.
+# w - write only. Create file if not in existence
+# w+ - write and read. Create file if not in existence
+# a - append only.  Create file if not in existence
+# a+ - append and read.  Create file if not in existence
 
 mode = input("enter the mode that you want to test: ")
 file = input("enter the name of the file: ")
@@ -56,7 +41,13 @@ def main():
 
 
 def open_file(in_file, in_mode):
-    f = open(in_file, in_mode)
+    f = ''
+    try:
+        f = open(in_file, in_mode)
+    except OSError as err:
+        print(f"[Errno {err.errno} ({errno.errorcode[err.errno]})] {os.strerror(err.errno)}\n")
+        print(f"file opened with {mode}")
+        sys.exit(99)
     return f
 
 def write_data(in_f):
