@@ -14,6 +14,26 @@ class Beta(Alpha):
 beta = Beta(5)
 beta.d = 4
 
+print(beta.__dict__)
+print(Beta.__dict__)
+print(Alpha.__dict__)
+
+print(hasattr(beta,'a'))
+print(hasattr(beta,'b'))
+print(hasattr(beta,'c'))
+print(hasattr(beta,'d'))
+
+
+print(hasattr(Alpha,'a'))
+print(hasattr(Alpha,'b'))
+print(hasattr(Alpha,'c'))
+print(hasattr(Alpha,'d'))
+
+print(hasattr(Beta,'a'))
+print(hasattr(Beta,'b'))
+print(hasattr(Beta,'c'))
+print(hasattr(Beta,'d'))
+
 # --> issubclass(Alpha, Beta) : function issubclass(Class_1, Class_2) is able to 
 # determine if Class_1 is a subclass of Class_2. Alpha is not a subclass of Beta 
 # (Beta is a subclass of Alpha). So, this statement will return False .
