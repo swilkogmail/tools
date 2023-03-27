@@ -4,3 +4,14 @@ https://www.w3schools.com/python/python_ref_keywords.asp
 keyboard shortcuts:
 ctrl+l clear screen
 ctrl+d exit terminal
+
+virtual environment:
+# create
+python3.11 -m venv tools
+# attach
+source ~/tools/bin/activate
+# deactivate
+deactivate
+# If your virtual environment is in a directory called 'venv':
+rm -r venv
+
