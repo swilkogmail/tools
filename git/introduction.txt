@@ -118,3 +118,14 @@ quick route:
 
     stephenwilkins@Stephens-iMac git_tests % git mv bar.txt foo.txt
     stephenwilkins@Stephens-iMac git_tests % git commit -m "file renamed back"
+
+notes:
+
+when you add a file it 'stages' the file. this means it updates the index in the .git directory
+
+cat .index
+git status will show the contents of the index
+git doesn't track directories
+    if you want directories to be added the you need to add a file call .keep to the directory
+
+git check-ignore will check whether a file is being ignored based on a pattern
