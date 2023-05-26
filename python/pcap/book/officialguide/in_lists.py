@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 
-ready = 'HIGHQ,CE,ASC,ACT,ASK,STAGEMART,TPS'
+ready = 'HIGHQ,CE,ASC,ACT,ASK,TPS,STAGEMART'
 required = 'HIGHQ,CE,ASC,ACT,ASK,STAGEMART,TPS'
-
-print(ready)
-print(required)
-
 ready_lst = sorted(ready.split(','))
 required_lst = sorted(required.split(','))
 
-print(ready_lst)
-print(required_lst)
+# we just need to check the all the batched that are required are ready
 
-if required in ready:
-    print('trigger load')
+try:
+    for realm in required_lst:
+        if realm in ready_lst:
+            continue
+        else:
+            raise Exception
+except Exception:
+    print(f"War: {err}")
 else:
-    print('hang fire')
+    print("run the load")
+# finally:
+#     print("finally is running")
