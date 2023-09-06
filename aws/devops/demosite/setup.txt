@@ -1,0 +1,20 @@
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html
+
+virtualenv ~/eb-virt
+
+source ~/eb-virt/bin/activate
+
+pip install django==2.2
+
+# verify the install
+pip freeze
+
+
+# start a new project
+
+django-admin startproject ebdjango
+
+
+create a zip for the archive:
+
+zip ../myapp.zip -r * .[^.]*
