@@ -1,0 +1,214 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Elasticbeanstalk test template
+Parameters:
+#   # BeanstalkService:
+#   #   Type: String
+#   # Ec2Service:
+#   #   Type: String
+#   # Partition:
+#   #   Type: String
+  ServiceRole:
+    Type: String
+    Default: 'arn:aws:iam::265321640290:role/service-role/aws-elasticbeanstalk-service-role'
+  InstanceType:
+    Type: String
+    Default: 't3.nano'
+  IamInstanceProfile:
+    Type: String
+    Default: 'aws-elasticbeanstalk-ec2-role'
+  SolutionStackName:
+    Type: String
+    Default: '64bit Amazon Linux 2023 v4.0.3 running Python 3.11'
+Resources:
+  Application:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName: ResilverWebsite
+      Description: Resilver Band Website
+  # AppVersion:
+  #   Type: AWS::ElasticBeanstalk::ApplicationVersion
+  #   Properties:
+  #     ApplicationName: !Ref Application
+  #     Description: Version 1.0
+  #     SourceBundle:
+  #       S3Bucket: Fn::Join:
+  #         - '-'
+  #         - 
+  #         - 'elasticbeanstalk-samples'
+  #         - !Ref 'AWS::Region'
+  #       S3Key: python-sample-20150402.zip
+  DevEnv:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: !Ref Application
+      Description: Resilver Website Development
+      EnvironmentName: resilver-dev
+      SolutionStackName: !Ref SolutionStackName
+      # VersionLabel: !Ref AppVersion
+      OptionSettings:
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: IamInstanceProfile
+          Value: !Ref IamInstanceProfile
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: InstanceType
+          Value: !Ref InstanceType
+        - Namespace: 'aws:elasticbeanstalk:environment'
+          OptionName: ServiceRole
+          Value: !Ref ServiceRole
+  ProdEnv:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: !Ref Application
+      Description: Resilver Website Production
+      EnvironmentName: resilver-prod
+      SolutionStackName: !Ref SolutionStackName
+      # VersionLabel: !Ref AppVersion
+      OptionSettings:
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: IamInstanceProfile
+          Value: !Ref IamInstanceProfile
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: InstanceType
+          Value: !Ref InstanceType
+        - Namespace: 'aws:elasticbeanstalk:environment'
+          OptionName: ServiceRole
+          Value: !Ref ServiceRole
+  # ServiceRole:
+  #   Type: AWS::IAM::Role
+  #   Properties:
+  #     AssumeRolePolicyDocument:
+  #       Version: 2012-10-17
+  #       Statement:
+  #         - Sid: ''
+  #           Effect: Allow
+  #           Principal:
+  #             Service: !Ref BeanstalkService
+  #           Action: 'sts:AssumeRole'
+  #           Condition:
+  #             StringEquals:
+  #               'sts:ExternalId': elasticbeanstalk
+  #     Policies:
+  #       - PolicyName: root
+  #         PolicyDocument:
+  #           Version: 2012-10-17
+  #           Statement:
+  #             - Effect: Allow
+  #               Action:
+  #                 - 'elasticloadbalancing:DescribeInstanceHealth'
+  #                 - 'ec2:DescribeInstances'
+  #                 - 'ec2:DescribeInstanceStatus'
+  #                 - 'ec2:GetConsoleOutput'
+  #                 - 'ec2:AssociateAddress'
+  #                 - 'ec2:DescribeAddresses'
+  #                 - 'ec2:DescribeSecurityGroups'
+  #                 - 'sqs:GetQueueAttributes'
+  #                 - 'sqs:GetQueueUrl'
+  #                 - 'autoscaling:DescribeAutoScalingGroups'
+  #                 - 'autoscaling:DescribeAutoScalingInstances'
+  #                 - 'autoscaling:DescribeScalingActivities'
+  #                 - 'autoscaling:DescribeNotificationConfigurations'
+  #               Resource:
+  #                 - '*'
+  #     Path: /
+  # InstanceProfile:
+  #   Type: AWS::IAM::InstanceProfile
+  #   Properties:
+  #     Path: /
+  #     Roles:
+  #       - !Ref InstanceProfileRole
+  # InstanceProfileRole:
+  #   Type: AWS::IAM::Role
+  #   Properties:
+  #     AssumeRolePolicyDocument:
+  #       Version: 2012-10-17
+  #       Statement:
+  #         - Effect: Allow
+  #           Principal:
+  #             Service:
+  #               - !Ref Ec2Service
+  #           Action:
+  #             - 'sts:AssumeRole'
+  #     Policies:
+  #       - PolicyName: root
+  #         PolicyDocument:
+  #           Version: 2012-10-17
+  #           Statement:
+  #             - Sid: BucketAccess
+  #               Action:
+  #                 - 's3:Get*'
+  #                 - 's3:List*'
+  #                 - 's3:PutObject'
+  #               Effect: Allow
+  #               Resource:
+  #                 - !Join 
+  #                   - ''
+  #                   - - 'arn:'
+  #                     - !Ref Partition
+  #                     - ':s3:::elasticbeanstalk-*-'
+  #                     - !Ref 'AWS::AccountId'
+  #                 - !Join 
+  #                   - ''
+  #                   - - 'arn:'
+  #                     - !Ref Partition
+  #                     - ':s3:::elasticbeanstalk-*-'
+  #                     - !Ref 'AWS::AccountId'
+  #                     - /*
+  #                 - !Join 
+  #                   - ''
+  #                   - - 'arn:'
+  #                     - !Ref Partition
+  #                     - ':s3:::elasticbeanstalk-*-'
+  #                     - !Ref 'AWS::AccountId'
+  #                     - '-*'
+  #                 - !Join 
+  #                   - ''
+  #                   - - 'arn:'
+  #                     - !Ref Partition
+  #                     - ':s3:::elasticbeanstalk-*-'
+  #                     - !Ref 'AWS::AccountId'
+  #                     - '-*/*'
+  #             - Sid: ECSAccess
+  #               Effect: Allow
+  #               Action:
+  #                 - 'ecs:StartTask'
+  #                 - 'ecs:StopTask'
+  #                 - 'ecs:RegisterContainerInstance'
+  #                 - 'ecs:DeregisterContainerInstance'
+  #                 - 'ecs:DescribeContainerInstances'
+  #                 - 'ecs:DiscoverPollEndpoint'
+  #                 - 'ecs:Submit*'
+  #                 - 'ecs:Poll'
+  #               Resource: '*'
+  #             - Sid: QueueAccess
+  #               Action:
+  #                 - 'sqs:ChangeMessageVisibility'
+  #                 - 'sqs:DeleteMessage'
+  #                 - 'sqs:ReceiveMessage'
+  #                 - 'sqs:SendMessage'
+  #               Effect: Allow
+  #               Resource: '*'
+  #             - Sid: DynamoPeriodicTasks
+  #               Action:
+  #                 - 'dynamodb:BatchGetItem'
+  #                 - 'dynamodb:BatchWriteItem'
+  #                 - 'dynamodb:DeleteItem'
+  #                 - 'dynamodb:GetItem'
+  #                 - 'dynamodb:PutItem'
+  #                 - 'dynamodb:Query'
+  #                 - 'dynamodb:Scan'
+  #                 - 'dynamodb:UpdateItem'
+  #               Effect: Allow
+  #               Resource:
+  #                 - !Join 
+  #                   - ''
+  #                   - - 'arn:'
+  #                     - !Ref Partition
+  #                     - ':dynamodb:*:'
+  #                     - !Ref 'AWS::AccountId'
+  #                     - ':table/*-stack-AWSEBWorkerCronLeaderRegistry*'
+  #             - Sid: MetricsAccess
+  #               Action:
+  #                 - 'cloudwatch:PutMetricData'
+  #               Effect: Allow
+  #               Resource: '*'
+  #     Path: /
