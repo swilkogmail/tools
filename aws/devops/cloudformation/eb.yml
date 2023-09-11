@@ -1,3 +1,4 @@
+# stack name: swilko-resilver-eb-stack-eu-west-2
 AWSTemplateFormatVersion: 2010-09-09
 Description: Elasticbeanstalk test template
 Parameters:
