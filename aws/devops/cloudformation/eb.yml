@@ -6,17 +6,18 @@ Parameters:
 #   #   Type: String
 #   # Ec2Service:
 #   #   Type: String
-#   # Partition:
-#   #   Type: String
-  ServiceRole:
+  Partition:
     Type: String
-    Default: 'arn:aws:iam::265321640290:role/service-role/aws-elasticbeanstalk-service-role'
+    Default: aws
+  # ServiceRole:
+  #   Type: String
+  #   Default: 'arn:aws:iam::265321640290:role/service-role/aws-elasticbeanstalk-service-role'
   InstanceType:
     Type: String
     Default: 't3.nano'
-  IamInstanceProfile:
-    Type: String
-    Default: 'aws-elasticbeanstalk-ec2-role'
+  # IamInstanceProfile:
+  #   Type: String
+  #   Default: 'aws-elasticbeanstalk-ec2-role'
   SolutionStackName:
     Type: String
     Default: '64bit Amazon Linux 2023 v4.0.3 running Python 3.11'
@@ -74,142 +75,220 @@ Resources:
         - Namespace: 'aws:elasticbeanstalk:environment'
           OptionName: ServiceRole
           Value: !Ref ServiceRole
-  # ServiceRole:
-  #   Type: AWS::IAM::Role
-  #   Properties:
-  #     AssumeRolePolicyDocument:
-  #       Version: 2012-10-17
-  #       Statement:
-  #         - Sid: ''
-  #           Effect: Allow
-  #           Principal:
-  #             Service: !Ref BeanstalkService
-  #           Action: 'sts:AssumeRole'
-  #           Condition:
-  #             StringEquals:
-  #               'sts:ExternalId': elasticbeanstalk
-  #     Policies:
-  #       - PolicyName: root
-  #         PolicyDocument:
-  #           Version: 2012-10-17
-  #           Statement:
-  #             - Effect: Allow
-  #               Action:
-  #                 - 'elasticloadbalancing:DescribeInstanceHealth'
-  #                 - 'ec2:DescribeInstances'
-  #                 - 'ec2:DescribeInstanceStatus'
-  #                 - 'ec2:GetConsoleOutput'
-  #                 - 'ec2:AssociateAddress'
-  #                 - 'ec2:DescribeAddresses'
-  #                 - 'ec2:DescribeSecurityGroups'
-  #                 - 'sqs:GetQueueAttributes'
-  #                 - 'sqs:GetQueueUrl'
-  #                 - 'autoscaling:DescribeAutoScalingGroups'
-  #                 - 'autoscaling:DescribeAutoScalingInstances'
-  #                 - 'autoscaling:DescribeScalingActivities'
-  #                 - 'autoscaling:DescribeNotificationConfigurations'
-  #               Resource:
-  #                 - '*'
-  #     Path: /
-  # InstanceProfile:
-  #   Type: AWS::IAM::InstanceProfile
-  #   Properties:
-  #     Path: /
-  #     Roles:
-  #       - !Ref InstanceProfileRole
-  # InstanceProfileRole:
-  #   Type: AWS::IAM::Role
-  #   Properties:
-  #     AssumeRolePolicyDocument:
-  #       Version: 2012-10-17
-  #       Statement:
-  #         - Effect: Allow
-  #           Principal:
-  #             Service:
-  #               - !Ref Ec2Service
-  #           Action:
-  #             - 'sts:AssumeRole'
-  #     Policies:
-  #       - PolicyName: root
-  #         PolicyDocument:
-  #           Version: 2012-10-17
-  #           Statement:
-  #             - Sid: BucketAccess
-  #               Action:
-  #                 - 's3:Get*'
-  #                 - 's3:List*'
-  #                 - 's3:PutObject'
-  #               Effect: Allow
-  #               Resource:
-  #                 - !Join 
-  #                   - ''
-  #                   - - 'arn:'
-  #                     - !Ref Partition
-  #                     - ':s3:::elasticbeanstalk-*-'
-  #                     - !Ref 'AWS::AccountId'
-  #                 - !Join 
-  #                   - ''
-  #                   - - 'arn:'
-  #                     - !Ref Partition
-  #                     - ':s3:::elasticbeanstalk-*-'
-  #                     - !Ref 'AWS::AccountId'
-  #                     - /*
-  #                 - !Join 
-  #                   - ''
-  #                   - - 'arn:'
-  #                     - !Ref Partition
-  #                     - ':s3:::elasticbeanstalk-*-'
-  #                     - !Ref 'AWS::AccountId'
-  #                     - '-*'
-  #                 - !Join 
-  #                   - ''
-  #                   - - 'arn:'
-  #                     - !Ref Partition
-  #                     - ':s3:::elasticbeanstalk-*-'
-  #                     - !Ref 'AWS::AccountId'
-  #                     - '-*/*'
-  #             - Sid: ECSAccess
-  #               Effect: Allow
-  #               Action:
-  #                 - 'ecs:StartTask'
-  #                 - 'ecs:StopTask'
-  #                 - 'ecs:RegisterContainerInstance'
-  #                 - 'ecs:DeregisterContainerInstance'
-  #                 - 'ecs:DescribeContainerInstances'
-  #                 - 'ecs:DiscoverPollEndpoint'
-  #                 - 'ecs:Submit*'
-  #                 - 'ecs:Poll'
-  #               Resource: '*'
-  #             - Sid: QueueAccess
-  #               Action:
-  #                 - 'sqs:ChangeMessageVisibility'
-  #                 - 'sqs:DeleteMessage'
-  #                 - 'sqs:ReceiveMessage'
-  #                 - 'sqs:SendMessage'
-  #               Effect: Allow
-  #               Resource: '*'
-  #             - Sid: DynamoPeriodicTasks
-  #               Action:
-  #                 - 'dynamodb:BatchGetItem'
-  #                 - 'dynamodb:BatchWriteItem'
-  #                 - 'dynamodb:DeleteItem'
-  #                 - 'dynamodb:GetItem'
-  #                 - 'dynamodb:PutItem'
-  #                 - 'dynamodb:Query'
-  #                 - 'dynamodb:Scan'
-  #                 - 'dynamodb:UpdateItem'
-  #               Effect: Allow
-  #               Resource:
-  #                 - !Join 
-  #                   - ''
-  #                   - - 'arn:'
-  #                     - !Ref Partition
-  #                     - ':dynamodb:*:'
-  #                     - !Ref 'AWS::AccountId'
-  #                     - ':table/*-stack-AWSEBWorkerCronLeaderRegistry*'
-  #             - Sid: MetricsAccess
-  #               Action:
-  #                 - 'cloudwatch:PutMetricData'
-  #               Effect: Allow
-  #               Resource: '*'
-  #     Path: /
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ResilverWebsiteRole
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: ''
+            Effect: Allow
+            Principal:
+              Service: elasticbeanstalk.amazonaws.com
+            Action: 'sts:AssumeRole'
+            Condition:
+              StringEquals:
+                'sts:ExternalId': elasticbeanstalk
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'elasticloadbalancing:DescribeInstanceHealth'
+                  - 'ec2:DescribeInstances'
+                  - 'ec2:DescribeInstanceStatus'
+                  - 'ec2:GetConsoleOutput'
+                  - 'ec2:AssociateAddress'
+                  - 'ec2:DescribeAddresses'
+                  - 'ec2:DescribeSecurityGroups'
+                  - 'sqs:GetQueueAttributes'
+                  - 'sqs:GetQueueUrl'
+                  - 'autoscaling:DescribeAutoScalingGroups'
+                  - 'autoscaling:DescribeAutoScalingInstances'
+                  - 'autoscaling:DescribeScalingActivities'
+                  - 'autoscaling:DescribeNotificationConfigurations'
+                Resource:
+                  - '*'
+      # Path: /
+  IamInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      # Path: /
+      Roles:
+        - !Ref InstanceProfileRole
+  InstanceProfileRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ResilverWebsiteEC2Role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Sid: BucketAccess
+                Action:
+                  - 's3:Get*'
+                  - 's3:List*'
+                  - 's3:PutObject'
+                Effect: Allow
+                Resource:
+                  - !Join 
+                    - ''
+                    - - 'arn:'
+                      - !Ref Partition
+                      - ':s3:::elasticbeanstalk-*-'
+                      - !Ref 'AWS::AccountId'
+                  - !Join 
+                    - ''
+                    - - 'arn:'
+                      - !Ref Partition
+                      - ':s3:::elasticbeanstalk-*-'
+                      - !Ref 'AWS::AccountId'
+                      - /*
+                  - !Join 
+                    - ''
+                    - - 'arn:'
+                      - !Ref Partition
+                      - ':s3:::elasticbeanstalk-*-'
+                      - !Ref 'AWS::AccountId'
+                      - '-*'
+                  - !Join 
+                    - ''
+                    - - 'arn:'
+                      - !Ref Partition
+                      - ':s3:::elasticbeanstalk-*-'
+                      - !Ref 'AWS::AccountId'
+                      - '-*/*'
+              - Sid: ECSAccess
+                Effect: Allow
+                Action:
+                  - 'ecs:StartTask'
+                  - 'ecs:StopTask'
+                  - 'ecs:RegisterContainerInstance'
+                  - 'ecs:DeregisterContainerInstance'
+                  - 'ecs:DescribeContainerInstances'
+                  - 'ecs:DiscoverPollEndpoint'
+                  - 'ecs:Submit*'
+                  - 'ecs:Poll'
+                Resource: '*'
+              - Sid: QueueAccess
+                Action:
+                  - 'sqs:ChangeMessageVisibility'
+                  - 'sqs:DeleteMessage'
+                  - 'sqs:ReceiveMessage'
+                  - 'sqs:SendMessage'
+                Effect: Allow
+                Resource: '*'
+              - Sid: DynamoPeriodicTasks
+                Action:
+                  - 'dynamodb:BatchGetItem'
+                  - 'dynamodb:BatchWriteItem'
+                  - 'dynamodb:DeleteItem'
+                  - 'dynamodb:GetItem'
+                  - 'dynamodb:PutItem'
+                  - 'dynamodb:Query'
+                  - 'dynamodb:Scan'
+                  - 'dynamodb:UpdateItem'
+                Effect: Allow
+                Resource:
+                  - !Join 
+                    - ''
+                    - - 'arn:'
+                      - !Ref Partition
+                      - ':dynamodb:*:'
+                      - !Ref 'AWS::AccountId'
+                      - ':table/*-stack-AWSEBWorkerCronLeaderRegistry*'
+              - Sid: MetricsAccess
+                Action:
+                  - 'cloudwatch:PutMetricData'
+                Effect: Allow
+                Resource: '*'
+      # Path: /
+# ResilverPipeline: 
+#   Type: AWS::CodePipeline::Pipeline 
+#   Properties: 
+#     RoleArn: 'arn:aws:iam::265321640290:role/service-role/AWSCodePipelineServiceRole-eu-west-2-NewDjango'
+#     Name: ResilverPipeline
+#     Stages: 
+#       - 
+#         Name: Source 
+#         Actions: 
+#           - 
+#             Name: SourceAction
+#             ActionTypeId: 
+#               Category: Source 
+#               Owner: AWS 
+#               Version: 1 
+#               Provider: CodeCommit
+#             OutputArtifacts: 
+#               - 
+#                 Name: SourceOutput 
+#             Configuration: 
+#               S3Bucket: codepipeline-eu-west-2-889352533193
+#               S3ObjectKey: ResilverPipeline
+#             RunOrder: 1 
+#     #   - 
+#     #     Name: Beta 
+#     #     Actions: 
+#     #       - 
+#     #         Name: BetaAction 
+#     #         InputArtifacts: 
+#     #           -
+#     #             Name: SourceOutput 
+#     #         ActionTypeId: 
+#     #           Category: Deploy 
+#     #           Owner: AWS 
+#     #           Version: 1 
+#     #           Provider: CodeDeploy
+#     #         Configuration: 
+#     #           ApplicationName: 
+#     #             Ref: ApplicationName 
+#     #           DeploymentGroupName: 
+#     #             Ref: DeploymentGroupName 
+#     #         RunOrder: 1 
+#     #   - 
+#     #     Name: Release 
+#     #     Actions: 
+#     #       - 
+#     #         Name: ReleaseAction
+#     #         InputArtifacts: 
+#     #           - 
+#     #             Name: SourceOutput 
+#     #         ActionTypeId: 
+#     #           Category: Deploy 
+#     #           Owner: AWS 
+#     #           Version: 1
+#     #           Provider: CodeDeploy 
+#     #         Configuration: 
+#     #           ApplicationName: 
+#     #             Ref: ApplicationName
+#     #           DeploymentGroupName: 
+#     #             Ref: DeploymentGroupName 
+#     #         RunOrder: 1 
+#     # ArtifactStore: 
+#     #   Type: S3 
+#     #   Location: 'codepipeline-eu-west-2-889352533193'
+#     #   # EncryptionKey:
+#     #   #   Id: arn:aws:kms:useast-1:ACCOUNT-ID:key/KEY-ID
+#     #   #   Type: KMS
+#     # # DisableInboundStageTransitions: 
+#     # #   - 
+#     # #     StageName: Release 
+#     # #     Reason: "Disabling the transition until integration tests are completed"
+#     # # Tags:
+#     # #   - Key: Project
+#     # #     Value: ProjectA
+#     # #   - Key: IsContainerBased
+#     # #     Value: 'true'
