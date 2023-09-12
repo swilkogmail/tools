@@ -216,6 +216,7 @@ Resources:
                 Effect: Allow
                 Resource: '*'
       # Path: /
+<<<<<<< HEAD
 # ResilverPipeline: 
 #   Type: AWS::CodePipeline::Pipeline 
 #   Properties: 
@@ -292,3 +293,5 @@ Resources:
 #     # #     Value: ProjectA
 #     # #   - Key: IsContainerBased
 #     # #     Value: 'true'
+=======
+>>>>>>> 0ad0bac01190181bcab521c307027a67790efb97
