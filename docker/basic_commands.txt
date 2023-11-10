@@ -1,0 +1,12 @@
+cd /Users/a0171639/airflow/airflow-materials/airflow-section-2
+
+# build the docker image from the Dockerfile:
+docker build -t airflow-basic .
+
+* Build a docker image from the Dockerfile in the current directory (airflow-materials/airflow-basic)  and name it airflow-basic
+
+# Start the docker image
+docker run --rm -d -p 8080:8080 airflow-basic
+
+# check that the container is running:
+docker ps
