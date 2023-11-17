@@ -10,3 +10,13 @@ docker run --rm -d -p 8080:8080 airflow-basic
 
 # check that the container is running:
 docker ps
+
+# Don't forget to stop your Airflow docker container with the commands
+docker ps
+
+#Then copy the container id of airflow-basic and execute:
+docker stop <container_id>
+
+docker exec -it <container_id> /bin/bash
+
+
