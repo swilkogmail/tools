@@ -1,0 +1,130 @@
+DM_MDM:
+  SAP_WRP:
+    Group1:
+      - dm_d_wrp_product.sql
+      - dm_lookup_vbak_vbap.sql
+      - dm_lookup_user_xref.sql
+      - dm_d_wrp_user_web_subs.sql
+      - dm_d_wrp_zw_customers.sql
+      - dm_d_wrp_zb_locations.sql
+      - dm_d_users.sql
+      - dm_d_users__update_uki_location.sql
+      - dm_d_users__update_uki_location_02.sql
+      - dm_d_users__update_uki_location_03.sql
+      - dm_d_users__update_zw_cust.sql
+      - dm_d_users__update_zw_org_name.sql
+      - dm_d_users__update_uki_enterprise_id.sql
+      - dm_d_users__update_segmentation.sql
+      - dm_d_wrp_zw_customers__insert_missing.sql
+      - dm_d_wrp_zb_locations__update.sql
+      - dm_d_wrp_zw_customers__update.sql
+    Group2:
+      - new.sql
+  Invoicing:
+    Group1:
+      - dm_d_wrp_customer.sql
+      - dm_d_wrp_customer__update_tps.sql
+      - dm_f_wrp_invoices.sql
+      - dm_f_sap_invoices.sql
+      - dm_f_wrp_subscriptions.sql
+      - dm_f_sap_subscriptions.sql
+      - dm_f_wrp_orders.sql
+      - dm_f_sap_orders.sql
+  Alerts:
+    - dm_d_alert.sql
+    - dm_d_alert_content_type.sql
+    - dm_d_alert_topic_facet.sql
+  TMS_Sales_Person:
+    - dm_d_tms_sales_person.sql
+    - dm_d_tms_sales_person__update_advisor_name.sql
+  Employees:
+    - dm_d_employees.sql
+  CPD_Product:
+    Group1:
+      - dm_tmp1_stub_d_cpd_product.sql
+      - dm_d_cpd_product.sql
+      - dm_tmp1_stub_d_cpd_product_type.sql
+      - dm_d_cpd_product_type.sql
+      - dm_d_cpd_product__update_CRS_info.sql
+      - dm_tmp1_stub_d_cpd_material_bom_com.sql
+      - dm_d_cpd_material_bom_com.sql
+      - dm_d_cpd_material.sql
+  TPS:
+    - dm_tmp1_stub_d_phone_number.sql
+    - dm_d_phone_number.sql
+  D_UKI_CONTACT:
+    Group1:
+      - dm_tmp1_stub_d_uki_contact.sql
+      - dm_tmp2_stub_d_uki_contact.sql
+      - dm_d_uki_contact__update_unknown_member.sql
+      - dm_d_uki_contact__update_main.sql
+      - dm_d_uki_contact__update_legal_preferences.sql
+      - dm_d_uki_contact__update_role_normalisation.sql
+      - dm_d_uki_contact__update_user_entitlement.sql
+      - dm_d_uki_contact__update_ELQ.sql
+      - dm_d_uki_contact__update_tps.sql
+      - dm_d_uki_contact__update_PM_FK.sql
+      - dm_d_uki_contact__update_trove_seg.sql
+  D_UKI_CONTACT_SSD:
+    - dm_d_uki_contact_ssd_full.sql
+    - dm_d_uki_contact_ssd_full__update_tps.sql
+    - dm_d_uki_contact_ssd.sql
+  D_UKI_LOCATION:
+    Group1:
+      - dm_tmp1_stub_d_uki_location.sql
+      # - dm_tmp2_stub_d_uki_location.sql
+      - dm_d_uki_location.sql
+      - dm_d_uki_location__update_IS_TR.sql
+      - dm_d_uki_location__update_CUST_SEG.sql
+      # - dm_d_uki_location__update_ECM_MEP.sql
+      - dm_d_uki_location__update_aggregated_contract_values.sql
+      - dm_d_uki_location__update_dynamic_trove_seg.sql
+      - dm_d_uki_location__update_frozen_trove_seg.sql
+      - dm_d_uki_location__update_tps.sql
+      - dm_d_uki_location__update_sales_rep_data.sql
+  D_UKI_LOCATION_SSD:
+    - dm_d_uki_location_ssd.sql
+  D_UKI_LOCATION_SSD_FULL:
+    - dm_d_uki_location_ssd_full.sql
+    - dm_d_uki_location_ssd_full__update_tps.sql
+  D_UKI_ENTERPRISE:
+    Group1:
+      # - dm_tmp2_stub_d_uki_enterprise.sql
+      - dm_tmp3_stub_d_uki_enterprise.sql
+      - dm_d_uki_enterprise.sql
+      - dm_d_uki_enterprise__update_SALES_REPS.sql
+      - dm_d_uki_enterprise__update_ECM_MEP.sql
+      - dm_d_uki_enterprise__update_GLI_TMP3.sql
+      - dm_d_uki_enterprise__update_lawtel_users.sql
+      - dm_tmp4_stub_d_uki_enterprise.sql
+      - dm_d_uki_enterprise__update_ECM_TMP4.sql
+      - dm_d_uki_enterprise__update_trove_seg.sql
+      - dm_d_uki_enterprise__update_aggregated_contract_values.sql
+DM_UEX:
+  UEX_Periods:
+    - dm_uex_document_display_period.sql
+    - dm_uex_page_period.sql
+    # - dm_uex_plda_nac_period.sql
+    # - dm_uex_kg_manipulate_period.sql
+  UEX_Dims:
+    - dm_lookup_d_users_uex.sql
+    - dm_d_url_uex.sql
+    - dm_d_search_term_uex.sql
+  UEX_Archive:
+    - dm_arc_uex_matter_maps.sql
+    - src_epam_uex_arc_uex_page.sql
+    - src_epam_uex_arc_uex_document_display.sql
+    # - dm_d_referring_site_uex.sql
+    # - dm_d_visit_uex.sql
+    # - dm_d_session_source_uex.sql
+    # - dm_d_reason_session_ended_uex.sql
+    # - dm_d_event_name_uex.sql
+    # - dm_d_client_ref_uex.sql
+    # - dm_d_fs_combination_uex.sql
+    # - dm_d_user_agent_uex.sql
+    # - dm_d_facet_uex.sql
+    # - dm_page_url_label.sql
+    # - dm_d_ip_address.sql
+    # - dm_d_browser_uex.sql
+    # - dm_d_operating_system_uex.sql
+    # - dm_d_services.sql
